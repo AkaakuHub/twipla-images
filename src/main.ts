@@ -17,8 +17,8 @@ export function start(apiKey: string) {
 		"position:fixed;right:12px;bottom:12px;z-index:2147483647;width:min(420px,calc(100vw - 24px))";
 	const root = host.attachShadow({ mode: "open" });
 	root.innerHTML = `<style>
-    *{box-sizing:border-box}section{font:14px/1.5 system-ui;color:#171717;background:#fff;border:2px solid #333;border-radius:12px;padding:16px;box-shadow:0 4px 24px #0004;max-height:75vh;overflow:auto}header{display:flex;justify-content:space-between;align-items:center}h2{font-size:18px;margin:0}label{display:block;margin-top:12px}input,textarea{width:100%;font:inherit;padding:8px;border:1px solid #777;border-radius:4px}button{font:inherit;cursor:pointer;padding:7px 10px;margin:6px 4px 0 0}button:disabled{cursor:wait;opacity:.5}#drop{border:2px dashed #777;padding:18px;margin:12px 0;text-align:center}#drop.over{background:#e8f4ff}article{border-top:1px solid #ccc;padding:10px 0;overflow-wrap:anywhere}a{color:#005eb8}p{margin:8px 0}#files{display:none}textarea{height:100px}
-    </style><section aria-label="画像アップロード"><header><h2>画像アップロード</h2><button id="close" type="button">閉じる</button></header>
+    *{box-sizing:border-box}section{font:14px/1.5 system-ui;color:#171717;background:#fff;border:2px solid #333;border-radius:12px;padding:16px;box-shadow:0 4px 24px #0004;max-height:75vh;overflow:auto}header{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}header div{display:flex;gap:4px}header button{margin:0;min-height:44px}[hidden]{display:none!important}#restore{margin:0;min-height:44px;padding:10px 12px;background:#fff;color:#171717;border:2px solid #333;border-radius:12px;box-shadow:0 4px 24px #0004}h2{font-size:18px;margin:0}label{display:block;margin-top:12px}input,textarea{width:100%;font:inherit;padding:8px;border:1px solid #777;border-radius:4px}button{font:inherit;cursor:pointer;padding:7px 10px;margin:6px 4px 0 0}button:disabled{cursor:wait;opacity:.5}#drop{border:2px dashed #777;padding:18px;margin:12px 0;text-align:center}#drop.over{background:#e8f4ff}article{border-top:1px solid #ccc;padding:10px 0;overflow-wrap:anywhere}a{color:#005eb8}p{margin:8px 0}#files{display:none}textarea{height:100px}
+    </style><button id="restore" type="button" aria-controls="panel" aria-expanded="false" hidden>画像アップロード</button><section id="panel" aria-label="画像アップロード"><header><h2>画像アップロード</h2><div><button id="minimize" type="button">最小化</button><button id="close" type="button">閉じる</button></div></header>
     <div id="drop">画像をドロップ<button id="choose" type="button">画像を選択</button></div><input id="files" type="file" accept="image/jpeg,image/png,image/gif,image/webp,image/heic,image/heif,.heic,.heif" multiple>
     <p id="status" role="status" aria-live="polite"></p><div id="results"></div>
     <label>画像URL一覧<textarea id="urls" readonly></textarea></label><button id="copy" type="button">URL一覧をコピー</button><button id="download" type="button">管理データを保存</button></section>`;
@@ -26,6 +26,21 @@ export function start(apiKey: string) {
 		const element = root.querySelector<T>(selector);
 		if (!element) throw new Error(selector);
 		return element;
+	};
+	const panel = query<HTMLElement>("#panel");
+	const minimize = query<HTMLButtonElement>("#minimize");
+	const restore = query<HTMLButtonElement>("#restore");
+	minimize.onclick = () => {
+		panel.hidden = true;
+		restore.hidden = false;
+		host.style.width = "max-content";
+		restore.focus();
+	};
+	restore.onclick = () => {
+		restore.hidden = true;
+		panel.hidden = false;
+		host.style.width = "min(420px,calc(100vw - 24px))";
+		minimize.focus();
 	};
 	const files = query<HTMLInputElement>("#files");
 	const choose = query<HTMLButtonElement>("#choose");
