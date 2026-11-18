@@ -4,9 +4,9 @@ import { type UploadedImage, upload } from "./imgbb";
 export function start(apiKey: string) {
 	if (
 		location.hostname !== "twipla.jp" ||
-		!/^\/events\/edit\/\d+\/?$/.test(location.pathname)
+		!/^\/(add|events\/edit\/\d+)\/?$/.test(location.pathname)
 	) {
-		alert("TwiPlaのイベント編集画面で実行してください。");
+		alert("TwiPlaのイベント作成・編集画面で実行してください。");
 		return;
 	}
 	if (document.getElementById("twipla-image-upload")) return;

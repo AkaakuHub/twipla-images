@@ -5,7 +5,7 @@ export function connectEditor() {
 	const field =
 		document.querySelector<HTMLTextAreaElement>("#EventDescription");
 	if (!editor || !field)
-		throw new Error("TwiPlaのイベント編集画面で実行してください。");
+		throw new Error("TwiPlaのイベント作成・編集画面で実行してください。");
 	const editable = editor;
 	const textarea = field;
 	let selection = document.createRange();
