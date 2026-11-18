@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TwiPla画像アップロード</title><link rel="canonical" href="https://twipla-images.akaaku.net/"><link rel="stylesheet" href="/style.css"><script type="module" src="/src/install.ts"></script></head>
+<body><main><h1>TwiPla画像アップロード</h1>
+<p>TwiPlaの画像アップロードの代わりに、外部の画像サービスImgBBを使います。選んだ画像をImgBBへ直接送り、その画像URLをTwiPlaの本文に挿入します。</p>
+<section><h2>1. APIキーを入力する</h2>
+<form id="setup" novalidate><label for="key">受け取ったAPIキー</label><input id="key" type="password" aria-describedby="key-error" autocomplete="off" autocapitalize="off" spellcheck="false"><p id="key-error" role="alert" hidden></p><button type="submit">登録用コードを作成</button></form>
+<details><summary>または、自分でAPIキーを取得する</summary><ol><li><a href="https://api.imgbb.com/" target="_blank" rel="noopener noreferrer">ImgBBのAPIページ</a>を開きます。</li><li>ImgBBにログインしてAPIキーを取得し、このページに戻ります。</li><li>取得したキーを上の入力欄に貼り付けます。</li></ol></details>
+</section>
+<section id="registration" hidden><h2>2. ブックマークに登録する</h2><a id="bookmark" draggable="true">TwiPla画像</a><button id="copy" type="button">登録用コードをコピー</button><label for="code">登録用コード</label><textarea id="code" readonly spellcheck="false"></textarea><p id="status" role="status" aria-live="polite"></p>
+<p>スマートフォンでは、このページを一度ブックマークに追加し、そのURLを登録用コードに置き換えます。ホーム画面への追加では実行できません。</p>
+<details open><summary>iPhone・iPadのSafari</summary><ol><li>「登録用コードをコピー」をタップします。</li><li>Safariの共有メニューから「ブックマークを追加」を選び、名前を「TwiPla画像」にして保存します。</li><li>Safariのブックマーク一覧を開き、保存した「TwiPla画像」を長押しして「編集」を選びます。</li><li>URL欄の内容をすべて消して、コピーしたコードを貼り付けます。先頭が<code>javascript:</code>であることを確認して保存します。</li><li>同じSafariでTwiPlaのイベント編集画面を開きます。ブックマーク一覧から「TwiPla画像」をタップして実行します。</li></ol><a href="https://support.apple.com/ja-jp/guide/iphone/iph42ab2f3a7/ios">Appleのブックマーク操作案内</a></details>
+<details><summary>AndroidのChrome</summary><ol><li>「登録用コードをコピー」をタップします。</li><li>Chromeのメニュー「︙」から星印をタップし、このページをブックマークに追加します。</li><li>「︙」→「ブックマーク」を開き、追加した項目のメニューから「編集」を選びます。</li><li>名前を「TwiPla画像」にし、URLをすべて消してコードを貼り付け、保存します。先頭が<code>javascript:</code>であることを確認してください。</li><li>同じChromeでTwiPlaのイベント編集画面を開き、アドレス欄に「TwiPla画像」と入力します。</li><li>候補に出たブックマーク「TwiPla画像」をタップします。検索ボタンを押したり、ブックマーク一覧から開いたりせず、アドレス欄の候補から選びます。</li></ol><a href="https://paul.kinlan.me/use-bookmarklets-on-chrome-on-android/">Chrome開発者による実行手順</a></details>
+<details><summary>iPhoneのChrome</summary><ol><li>コードをコピーし、Chromeのメニュー「…」からこのページをブックマークに追加します。</li><li>ブックマークの「編集」を開き、名前を「TwiPla画像」にして、URL全体をコードに置き換えます。先頭の<code>javascript:</code>を確認して保存します。</li><li>TwiPlaのイベント編集画面を開き、アドレス欄に「TwiPla画像」と入力して、候補のブックマークを選びます。</li></ol><p>実機での動作は未確認です。実行できない場合はSafariで登録してください。</p></details>
+<details><summary>AndroidのSamsung Internet・Firefox・Edge</summary><p>これらのブラウザで、このブックマークレットが動作するかは確認できていません。AndroidではChromeの登録手順をご案内しています。</p><p><a href="https://www.samsung.com/us/support/answer/ANS10012958/">Samsungのブックマーク操作案内</a>・<a href="https://support.mozilla.org/en-US/kb/add-delete-and-view-bookmarked-webpages-firefox-android">Firefoxのブックマーク操作案内</a></p></details>
+<details><summary>パソコンのChrome・Safari・Firefox・Edge</summary><ol><li>ブラウザのブックマークバーを表示します。</li><li>上の「TwiPla画像」リンクを、ブックマークバーへドラッグします。</li><li>TwiPlaのイベント編集画面で、登録した「TwiPla画像」をクリックします。</li></ol></details>
+</section>
+<section><h2>3. TwiPlaに画像を挿入する</h2><ol><li>登録に使ったブラウザで、TwiPlaのイベント編集画面を開きます。</li><li>登録した「TwiPla画像」を実行します。</li><li>本文の挿入したい場所をタップしてから、パネルの「画像を選択」で画像を選びます。複数選択もできます。</li><li>アップロードが終わったら本文を確認し、TwiPlaの保存ボタンで保存します。</li></ol><p>JPEG・PNG・GIF・WebP・HEIC・HEIFの32MB以下の画像に対応します。</p><p>画像はImgBBに保存されます。画像URLを知っている人は画像を見ることができます。「管理データを保存」で削除用URLを手元に残せます。TwiPlaの本文から画像を消しても、ImgBBの画像は削除されません。</p></section>
+<section><h2>実行できないとき</h2><ul><li>ブックマークのURLが<code>javascript:</code>で始まっているか、途中で切れていないか確認してください。</li><li>通常のページが開く場合は、保存したURLを登録用コードに置き換えてください。</li><li>APIキーを変更した場合は、コードを作り直してブックマークのURLも置き換えてください。</li><li>ブラウザの制限やTwiPla側の変更で実行できない場合があります。</li></ul></section>
+</main></body></html>

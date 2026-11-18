@@ -1,0 +1,18 @@
+{
+	"name": "twipla-images",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"check": "tsc --noEmit",
+		"build": "vp build",
+		"dev": "vp dev",
+		"deploy": "pnpm check && pnpm build && cf deploy ./dist"
+	},
+	"devDependencies": {
+		"cf": "1.0.0-rc.0",
+		"typescript": "^5.9.3",
+		"vite-plus": "^1.7.0",
+		"@types/node": "^24.0.0"
+	},
+	"packageManager": "pnpm@12.10.1"
+}
